@@ -1,7 +1,7 @@
 import requests
 from django.conf import settings
 
-MASTER_URL = '52.116.36.178'
+MASTER_URL = settings.BLOCKCHAIN_CLIENT_URL
 port = 8003 if settings.PRODUCTION else 8001
 base_url = f'http://{MASTER_URL}:{port}'
 
@@ -13,7 +13,7 @@ class BlockchainClientBase:
 
     @staticmethod
     def get_shipment(shipment_id):
-        return requests.post(base_url + '/getshipment', {'shipmentId': shipment_id})
+        return requests.post(base_url + '/getshipment', {'shipmentId': 1})
 
 
 class SellerClient(BlockchainClientBase):
@@ -72,14 +72,14 @@ class BuyerClient(BlockchainClientBase):
         return requests.post(base_url + '/getallshipments', {'sellerId': 'all'})
 
     @staticmethod
-    def init_contract(buyer_id, shipment_id, temp_threshold, ambient_temp_threshold, co2_threshold,
+    def init_contract(buyer_id, shipment_id, temp_threshold, ambient_temp_threshold, humid_threshold,
                       voc_threshold, freshness_threshold, price, status='pending'):
         return requests.post(base_url + '/initcontract', {
             'buyerId': buyer_id,
             'shipmentId': shipment_id,
             'tempThreshold': temp_threshold,
             'ambientTempThreshold': ambient_temp_threshold,
-            'co2Threshold': co2_threshold,
+            'humidThreshold': humid_threshold,
             'vocThreshold': voc_threshold,
             'freshnessThreshold': freshness_threshold,
             'price': price,

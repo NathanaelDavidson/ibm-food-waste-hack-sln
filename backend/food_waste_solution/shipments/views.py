@@ -39,16 +39,16 @@ class ContractCreate(views.APIView):
         shipment_id = request.data.get('shipmentId')
         temp_threshold = request.data.get('tempThreshold')
         ambient_temp_threshold = request.data.get('ambientTempThreshold')
-        co2_threshold = request.data.get('co2Threshold')
+        humid_threshold = request.data.get('humidThreshold')
         voc_threshold = request.data.get('vocThreshold')
         freshness_threshold = request.data.get('freshnessThreshold')
         price = request.data.get('price')
         if (shipment_id is None or temp_threshold is None or
-            co2_threshold is None or voc_threshold is None or
+            humid_threshold is None or voc_threshold is None or
                 freshness_threshold is None or price is None):
             return Response(status=400)
         resp = BuyerClient.init_contract(request.user.pk, shipment_id,
-                                         temp_threshold, ambient_temp_threshold, co2_threshold, voc_threshold, freshness_threshold,
+                                         temp_threshold, ambient_temp_threshold, humid_threshold, voc_threshold, freshness_threshold,
                                          price)
         return Response(resp.json(), status=resp.status_code)
 
@@ -56,7 +56,7 @@ class ContractCreate(views.APIView):
 @method_decorator(csrf_exempt, name='dispatch')
 class ContractDecline(views.APIView):
     def post(self, request, *args, **kwargs):
-        contract_id = request.query_params.get('contractId')
+        contract_id = request.data.get('contractId')
         if contract_id is None:
             return Response(status=400)
         resp = SellerClient.decline_offer(contract_id)
@@ -65,8 +65,8 @@ class ContractDecline(views.APIView):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ContractDetail(views.APIView):
-    def get(self, request, *args, **kwargs):
-        contract_id = request.query_params('contractId')
+    def post(self, request, *args, **kwargs):
+        contract_id = request.data('contractId')
         if contract_id is None:
             return Response(status=400)
         resp = SellerClient.view_contract(contract_id)
@@ -75,7 +75,7 @@ class ContractDetail(views.APIView):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class PendingOffersList(views.APIView):
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         return SellerClient.get_pending_offers(request.user.pk)
 
 
@@ -108,23 +108,38 @@ class ShipmentCreate(views.APIView):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ShipmentDetail(views.APIView):
-    def delete(self, request, *args, **kwargs):
-        shipment_id = request.query_params.get('shipmentId')
+    def post(self, request, *args, **kwargs):
+        shipment_id = request.data.get('shipmentId')
         if not shipment_id:
             return Response(status=400)
         resp = SellerClient.get_shipment(shipment_id)
-        return Response(resp.json(), status=resp.status_code)
+        print(resp.json())
+        return Response(zipAllReadings(resp.json().get('shipment')), status=resp.status_code)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ShipmentList(views.APIView):
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         resp = BuyerClient.get_all_shipments()
-        return Response(resp.json(), status=resp.status_code)
+        return Response([zipAllReadings(ship) for ship in resp.json().get('shipments')], status=resp.status_code)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ShipmentListBySeller(views.APIView):
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         resp = SellerClient.get_shipments_by_seller(request.user.pk)
-        return Response(resp.json(), status=resp.status_code)
+        return Response([zipAllReadings(ship) for ship in resp.json().get('shipments')], status=resp.status_code)
+
+def zipAllReadings(shipment):
+    if shipment == None:
+        return None
+    timestamps = shipment.get('timestamps')
+    shipment['vocReadings'] = zipReadings(shipment.get('vocReadings'), timestamps)
+    shipment['freshnessReadings'] = zipReadings(shipment.get('freshnessReadings'), timestamps)
+    shipment['tempReadings'] = zipReadings(shipment.get('tempReadings'), timestamps)
+    shipment['ambientTempReadings'] = zipReadings(shipment.get('ambientTempReadings'), timestamps)
+    shipment['humidReadings'] = zipReadings(shipment.get('humidReadings'), timestamps)
+    return shipment
+
+def zipReadings(readings, timestamps):
+    return [{'value': reading, 'timestamp': timestamp} for reading, timestamp in zip(readings, timestamps)]

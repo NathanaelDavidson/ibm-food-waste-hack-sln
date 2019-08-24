@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AnnotatedDataSet } from '../../shipment-detail/shipment-data/shipment-data.component';
+import { AnnotatedDataSet } from '../shipment-data.component';
 
 @Component({
   selector: 'app-shipment-data-table',

@@ -12,23 +12,21 @@ export class ShipmentService {
 
   constructor(private http: HttpClient) { }
 
-  getAllShipments(): Observable<SimpleShipment[]> {
-    return this.http.get<SimpleShipment[]>(environment.urls.allShipments).pipe(
+  getAllShipments(): Observable<Shipment[]> {
+    return this.http.post<Shipment[]>(environment.urls.allShipments, {}).pipe(
       take(1)
     );
   }
 
-  getShipmentsBySeller(): Observable<SimpleShipment[]> {
-    return this.http.get<SimpleShipment[]>(environment.urls.shipmentListBySeller).pipe(
+  getShipmentsBySeller(): Observable<Shipment[]> {
+    return this.http.post<Shipment[]>(environment.urls.shipmentListBySeller, {}).pipe(
       take(1)
     );
   }
 
   getShipment(shipmentId: number): Observable<Shipment> {
-    return this.http.get<Shipment>(environment.urls.shipmentDetail, {
-      params: {
-        shipmentId: shipmentId.toString()
-      }
+    return this.http.post<Shipment>(environment.urls.shipmentDetail, {
+      shipmentId: shipmentId.toString()
     }).pipe(
       take(1)
     );

@@ -21,9 +21,9 @@ export const environment = {
     cancelOffer: CONTRACTS_BASE_URL + 'cancel/',
     declineOffer: CONTRACTS_BASE_URL + 'decline/',
     contractDetail: CONTRACTS_BASE_URL,
-    shipmentDetail: SHIPMENTS_BASE_URL,
+    shipmentDetail: SHIPMENTS_BASE_URL + '',
     shipmentList: SHIPMENTS_BASE_URL + 'all/',
-    shipmentListBySeller: SHIPMENTS_BASE_URL + 'seller/',
+    shipmentListBySeller: SHIPMENTS_BASE_URL + '/seller/',
     shipmentCreate: SHIPMENTS_BASE_URL + 'create/'
   }
 };

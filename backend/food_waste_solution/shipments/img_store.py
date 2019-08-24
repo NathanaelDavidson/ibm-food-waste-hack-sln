@@ -3,10 +3,10 @@ from ibm_botocore.client import Config, ClientError
 from django.conf import settings
 
 COS_BUCKET_NAME = 'shipment-initial-photos'
-COS_ENDPOINT = 'https://s3.us.cloud-object-storage.appdomain.cloud'
-COS_API_KEY_ID = 'yoc93lQzrJXAYT-TC1IfyzeRjVcon549dH5AncqM98xb'
+COS_ENDPOINT = setting.COS_ENDPOINT
+COS_API_KEY_ID = settings.COS_API_KEY_ID
 COS_AUTH_ENDPOINT = 'https://iam.cloud.ibm.com/identity/token'
-COS_RESOURCE_CRN = 'crn:v1:bluemix:public:cloud-object-storage:global:a/4d36c4a750b3493e81c071790d54424a:78ae1019-6dd0-42cf-851a-92a9019da4aa:bucket:shipment-initial-photos'
+COS_RESOURCE_CRN = settings.COS_RESOURCE_CRN
 
 bucket = ibm_boto3.resource('s3',
     ibm_api_key_id=COS_API_KEY_ID,

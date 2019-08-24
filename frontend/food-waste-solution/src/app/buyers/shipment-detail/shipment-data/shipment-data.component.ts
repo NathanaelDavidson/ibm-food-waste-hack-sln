@@ -57,10 +57,12 @@ function annotateReadings(readings: Reading[], shortLabel: string, longLabel: st
 }
 
 function getAnnotatedDataSets(shipment: Shipment): AnnotatedDataSet[] {
+  console.log(shipment)
   return [
-    annotateReadings(shipment.freshness, 'frsh', 'Freshness'),
+    annotateReadings(shipment.freshnessReadings, 'frsh', 'Freshness'),
     annotateReadings(shipment.tempReadings, 'temp', 'Temperature'),
-    annotateReadings(shipment.co2Readings, 'co2', 'Carbon Dioxide'),
+    annotateReadings(shipment.ambientTempReadings, 'amb', 'Ambient Temperature'),
+    annotateReadings(shipment.humidReadings, 'humid', 'Carbon Dioxide'),
     annotateReadings(shipment.vocReadings, 'voc', 'Volatile Organic Compound')
   ];
 }

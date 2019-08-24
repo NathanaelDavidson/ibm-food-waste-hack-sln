@@ -44,7 +44,9 @@ import { ContractSummaryComponent } from './contract-summary/contract-summary.co
     GalleryComponent,
     ChartComponent,
     ShipmentSummaryTileComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    ShipmentSummaryListComponent,
+    ContractSummaryComponent
   ]
 })
 export class SharedModule { }

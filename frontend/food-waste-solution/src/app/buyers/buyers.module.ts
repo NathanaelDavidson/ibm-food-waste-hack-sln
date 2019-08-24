@@ -13,6 +13,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { BiddingFormComponent } from './bidding-form/bidding-form.component';
+import { BuyerShipmentOverviewComponent } from './buyer-shipment-overview/buyer-shipment-overview.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { BiddingFormComponent } from './bidding-form/bidding-form.component';
     ShipmentDataComponent,
     ShipmentDataTableComponent,
     BiddingFormComponent,
+    BuyerShipmentOverviewComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +32,7 @@ import { BiddingFormComponent } from './bidding-form/bidding-form.component';
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatTabsModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
     SharedModule

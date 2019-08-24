@@ -20,14 +20,14 @@ export class BiddingFormComponent implements OnChanges {
     const bounds = latestContract ? {
       ambientTemp: latestContract.tempThreshold,
       temp: latestContract.tempThreshold,
-      co2: latestContract.co2Threshold,
+      humid: latestContract.humidThreshold,
       voc: latestContract.vocThreshold,
       freshness: latestContract.freshnessThreshold,
       bid: latestContract.price
     } : this.shipment.boundaryReadings();
     const ambientTempValidators = [Validators.required];
     const tempValidators = [Validators.required];
-    const co2Validators = [Validators.required];
+    const humidValidators = [Validators.required];
     const vocValidators = [Validators.required];
     const freshnessValidators = [Validators.required];
     const bidValidators = [Validators.required, Validators.min(0)];
@@ -37,8 +37,8 @@ export class BiddingFormComponent implements OnChanges {
     if (bounds.temp) {
       tempValidators.push(Validators.min(bounds.temp));
     }
-    if (bounds.co2) {
-      co2Validators.push(Validators.min(bounds.co2));
+    if (bounds.humid) {
+      humidValidators.push(Validators.min(bounds.humid));
     }
     if (bounds.voc) {
       vocValidators.push(Validators.min(bounds.voc));
@@ -52,7 +52,7 @@ export class BiddingFormComponent implements OnChanges {
     this.biddingForm = this.formBuilder.group({
       ambientTemp: [undefined, ambientTempValidators],
       temp: [undefined, tempValidators],
-      co2: [undefined, co2Validators],
+      humid: [undefined, humidValidators],
       voc: [undefined, vocValidators],
       freshness: [undefined, freshnessValidators],
       bid: [undefined, bidValidators]
@@ -66,7 +66,7 @@ export class BiddingFormComponent implements OnChanges {
     this.contractService.makeOffer(this.shipment.shipmentId,
       formData.temp,
       formData.ambientTemp,
-      formData.co2,
+      formData.humid,
       formData.voc,
       formData.freshness,
       formData.bid

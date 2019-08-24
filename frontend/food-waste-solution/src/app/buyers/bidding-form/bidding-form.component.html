@@ -10,7 +10,7 @@
           Amb Temp (&deg;C)
         </th>
         <th>
-          Co2
+          Humid
         </th>
         <th>
           VOC
@@ -28,10 +28,9 @@
         <td>
           Current Threshold
         </td>
-        <!--Fill after adjusting model-->
         <td>{{latestContract.tempThreshold}}</td>
         <td>{{latestContract.ambientTempThreshold}}</td>
-        <td>{{latestContract.co2Threshold}}</td>
+        <td>{{latestContract.humidThreshold}}</td>
         <td>{{latestContract.vocThreshold}}</td>
         <td>{{latestContract.freshnessThreshold}</td>
       <td>{{latestContract.price | currency}}</td>
@@ -42,7 +41,7 @@
         </td>
         <td>{{boundaryReadings.temp}}</td>
         <td>{{boundaryReadings.ambientTemp}}</td>
-        <td>{{boundaryReadings.co2}}</td>
+        <td>{{boundaryReadings.humid}}</td>
         <td>{{boundaryReadings.voc}}</td>
         <td>{{boundaryReadings.freshness}}</td>
         <td>{{0 | currency}}</td>
@@ -65,8 +64,8 @@
         </td>
         <td>
           <mat-form-field appearance="outline">
-            <mat-label>Co2</mat-label>
-            <input matInput type="number" min="0" step="0.01" formControlName="co2">
+            <mat-label>Humid</mat-label>
+            <input matInput type="number" min="0" step="0.01" formControlName="humid">
           </mat-form-field>
         </td>
         <td>

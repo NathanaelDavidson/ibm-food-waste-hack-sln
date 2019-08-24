@@ -22,8 +22,10 @@ abstract class BaseShipment {
     productName: string;
     description: string;
     quantity: {
-        value: number;
+        number: number;
         units: string;
+        currency: string;
+        value: number;
     };
     source: string;
     destination: string;
@@ -39,21 +41,21 @@ export class SimpleShipment extends BaseShipment {
     sellerId: number;
     ambientTempReading: Reading;
     tempReading: Reading;
-    co2Reading: Reading;
+    humidReading: Reading;
     vocReading: Reading;
     freshness: Reading;
     contractIds: number;
 }
 
 export class Shipment extends BaseShipment {
-    seller: User;
+    sellerId: number;
     ambientTempReadings: Reading[];
     tempReadings: Reading[];
-    co2Readings: Reading[];
+    humidReadings: Reading[];
     vocReadings: Reading[];
-    freshness: Reading[];
+    freshnessReadings: Reading[];
     contracts: SimpleContract[];
-    updateImgUrls: string[];
+    images: string[];
 
     get latestContract() {
         return this.contracts ? this.contracts[this.contracts.length - 1] : null;
@@ -63,9 +65,9 @@ export class Shipment extends BaseShipment {
         return {
             ambientTemp: maxReading(this.ambientTempReadings),
             temp: maxReading(this.tempReadings),
-            co2: maxReading(this.tempReadings),
+            humid: maxReading(this.humidReadings),
             voc: maxReading(this.vocReadings),
-            freshness: minReading(this.freshness)
+            freshness: minReading(this.freshnessReadings)
         };
     }
 }

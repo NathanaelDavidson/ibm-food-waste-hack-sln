@@ -3,7 +3,7 @@ import { Shipment } from './shipment';
 abstract class BaseContract {
     buyerId: number;
     tempThreshold: number;
-    co2Threshold: number;
+    humidThreshold: number;
     vocThreshold: number;
     freshnessThreshold: number;
     ambientTempThreshold: number;

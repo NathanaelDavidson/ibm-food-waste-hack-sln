@@ -45,7 +45,7 @@ export class GalleryComponent implements OnInit, OnChanges {
     this.images.forEach((image: File | string) => {
       if (image instanceof File) {
         this.reader.readAsDataURL(image);
-      } else {
+      } else if (image)  {
         this.galleryImages.push({
           small: image,
           medium: image,

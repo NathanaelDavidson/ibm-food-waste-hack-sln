@@ -1,0 +1,8 @@
+<div fxLayout="column" fxLayoutAlign="start center">
+  <app-shipment-summary-list *ngIf="(shipments$ | async) as shipments; else placeholder" [shipments]="shipments">
+  </app-shipment-summary-list>
+  <ng-template #placeholder>
+    <mat-error>{{errorMessage}}</mat-error>
+    <mat-spinner *ngIf="!errorMessage"></mat-spinner>
+  </ng-template>
+</div>

@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
+from dotenv import load_dotenv
+load_dotenv()
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -20,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'uekwkyatx@xk90qck^qup4l-f29io((a%yxa=9l95jm2b1x9r2'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 PRODUCTION = False
@@ -60,6 +62,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'food_waste_solution.urls'
+
+APPEND_SLASH = False
 
 TEMPLATES = [
     {
@@ -155,3 +159,8 @@ CORS_ORIGIN_WHITELIST = [
 BUYER_GROUP_NAME = 'buyer'
 SELLER_GROUP_NAME = 'seller'
 USER_TYPES = {BUYER_GROUP_NAME, SELLER_GROUP_NAME}
+
+BLOCKCHAIN_CLIENT_URL = os.getenv('BLOCKCHAIN_URL')
+COS_ENDPOINT = os.getenv('COS_ENDPOINT')
+COS_API_KEY_ID = os.getenv('COS_API_KEY_ID')
+COS_RESOURCE_CRN = os.getenv('COS_RESOURCE_CRN')

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SimpleShipment } from 'src/app/models/shipment';
+import { SimpleShipment, Shipment } from 'src/app/models/shipment';
 
 @Component({
   selector: 'app-shipment-summary-tile',
@@ -7,7 +7,7 @@ import { SimpleShipment } from 'src/app/models/shipment';
   styleUrls: ['./shipment-summary-tile.component.scss']
 })
 export class ShipmentSummaryTileComponent implements OnInit {
-  @Input() shipment: SimpleShipment;
+  @Input() shipment: Shipment;
   constructor() { }
 
   ngOnInit() {
