@@ -1,0 +1,8 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div *ngIf="sellerShipments; else placeholder">
+
+  </div>
+  <ng-template #placeholder>
+    <a fxFlexOffset="25px" mat-raised-button color="primary" [routerLink]="['/sellers/shipments/create']">Add a shipment</a>
+  </ng-template>
+</div>

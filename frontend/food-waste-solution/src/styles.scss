@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import 'assets/scss/variables.scss';
+
+.mat-sidenav-container, .mat-sidenav-content, .mat-tab-body-content {
+  transform: none !important;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.app-bg-primary {
+  background-color: $primary;
+}
+
+.app-bg-dark {
+  background-color: $primary-dark;
+}
+
+.app-bg-darkest {
+  background-color: $primary-darkest;
+}
+
+.app-bg-light {
+  background-color: $primary-light;
+}
+
+.app-bg-accent {
+  background-color: $accent;
+}
+
+.app-bg-warn {
+  background-color: $warn;
+}

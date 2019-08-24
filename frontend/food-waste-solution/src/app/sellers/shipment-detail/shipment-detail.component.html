@@ -1,0 +1,40 @@
+<div *ngIf="(shipment$ | async) as shipment; else placeholder" fxLayout="row" fxLayoutAlign="center stretch"
+  fxLayout.xs="column" fxLayoutAlign.xs="start center">
+  <!--Product details-->
+  <div fxLayout="column" fxLayoutAlign="center center">
+    <app-gallery [images]="[shipment.primaryImgUrl].concat(shipment.updateImgUrls)"></app-gallery>
+    <table>
+      <tr>
+        <td>Product</td>
+        <td>{{shipment.productName}}</td>
+      </tr>
+      <tr>
+        <td>Seller</td>
+        <td>{{shipment.seller.username}}</td>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td>{{shipment.description}}</td>
+      </tr>
+      <tr>
+        <td>Quantity</td>
+        <td>{{shipment.quantity.value}} {{shipment.quantity.units}}</td>
+      </tr>
+      <tr>
+        <td>Source</td>
+        <td>{{shipment.source}}</td>
+      </tr>
+      <tr>
+        <td>Destination</td>
+        <td>{{shipment.destination}}</td>
+      </tr>
+    </table>
+  </div>
+  <!--Quality tracking data-->
+  <app-shipment-data [shipment]="shipment"></app-shipment-data>
+</div>
+<ng-template #placeholder>
+  <div fxFill fxLayoutAlign="center center">
+    <mat-spinner aria-label="Shipment details loading"></mat-spinner>
+  </div>
+</ng-template>

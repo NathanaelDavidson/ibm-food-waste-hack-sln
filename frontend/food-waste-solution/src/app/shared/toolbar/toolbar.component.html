@@ -1,0 +1,8 @@
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="space-between center">
+  <ng-container *ngIf="auth.getCurrentUser() as user">
+    <button mat-icon-button type="button" aria-label="Toggle Menu" (click)="menuButtonClick.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <button mat-button type="button">{{user.username}}</button>
+  </ng-container>
+</mat-toolbar>

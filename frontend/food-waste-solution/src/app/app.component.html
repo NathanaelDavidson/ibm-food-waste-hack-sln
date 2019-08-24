@@ -1,0 +1,9 @@
+<mat-sidenav-container fxFill>
+  <mat-sidenav #sidenav id="sidenav" class="app-bg-primary">
+    <app-sidenav (linkClicked)="sidenav.close()"></app-sidenav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-toolbar (menuButtonClick)="sidenav.toggle()"></app-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

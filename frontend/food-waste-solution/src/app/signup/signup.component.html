@@ -1,0 +1,58 @@
+<div fxLayout="column" fxLayoutAlign="start center">
+  <h1>Signup</h1>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="start center"
+    fxLayoutGap="5px">
+    <mat-form-field>
+      <mat-label>I am a...</mat-label>
+      <mat-select #userType formControlName="type">
+        <mat-option *ngFor="let option of userTypes" [value]="option" required>{{option | lowercase}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="signupForm.get('type').hasError('required')">This field is required.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Company</mat-label>
+      <input matInput type="text" formControlName="company" required>
+      <mat-error *ngIf="signupForm.get('company').hasError('required')">This field is required.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Industry</mat-label>
+      <input matInput type="text" formControlName="industry" required>
+      <mat-error *ngIf="signupForm.get('industry').hasError('required')">This field is required.</mat-error>
+    </mat-form-field>
+    <mat-form-field *ngIf="userType.value === 'seller'">
+      <mat-label>Product</mat-label>
+      <mat-select formControlName="product">
+        <mat-option *ngFor="let option of productChoices" [value]="option" required>{{option | lowercase}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Username</mat-label>
+      <input matInput type="text" formControlName="username" required>
+      <mat-error *ngIf="signupForm.get('username').hasError('required')">This field is required.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" required>
+      <mat-error *ngIf="!signupForm.get('email').hasError('required') && signupForm.get('email').hasError('email')">
+        Email is invalid.</mat-error>
+      <mat-error *ngIf="signupForm.get('email').hasError('required')">This field is required.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" required>
+      <mat-error *ngIf="signupForm.get('password').hasError('required')">This field is required.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Confirm Password</mat-label>
+      <input matInput type="password" formControlName="confirmPassword" required>
+      <mat-error *ngIf="signupForm.get('confirmPassword').hasError('required')">This field is required.</mat-error>
+    </mat-form-field>
+    <div fxLayoutGap="10px">
+      <a mat-raised-button color="warn" [routerLink]="['/']" (click)="signupForm.reset()">Cancel</a>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </div>
+    <mat-error
+      *ngIf="signupForm.get('password').touched && signupForm.get('confirmPassword').touched && signupForm.hasError('passwordMismatch')">
+      Passwords do not match.</mat-error>
+  </form>
+</div>

@@ -1,0 +1,8 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{shipment.productName}}</mat-card-title>
+    <mat-card-subtitle>{{shipment.quantity.value}} {{shipment.quantity.units}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="shipment.primaryImgUrl">
+  <mat-card-content></mat-card-content>
+</mat-card>

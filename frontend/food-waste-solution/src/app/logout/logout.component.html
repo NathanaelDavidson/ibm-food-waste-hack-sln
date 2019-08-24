@@ -1,0 +1,14 @@
+<div fxFlex="grow" fxLayout="column" fxLayoutAlign="center center">
+    <ng-container [ngSwitch]="logoutState">
+        <ng-container *ngSwitchCase="'success'">
+            <h6>You have been logged out.</h6>
+            <a mat-raised-button color="primary" [routerLink]="['/']">Home</a>
+        </ng-container>
+        <ng-container *ngSwitchCase="'failure'">
+            <h6>Something went wrong.</h6>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+            <h6>Logging you out...</h6>
+        </ng-container>
+    </ng-container>
+</div>

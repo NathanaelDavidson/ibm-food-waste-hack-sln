@@ -1,0 +1,47 @@
+.gallery-wrapper {
+    width: 480px;
+    height: 400px;
+}
+
+.image-scroller {
+    height: 100%;
+    width: 20%;
+    overflow-x: scroll;
+}
+
+.focus-image {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.focus-image-box {
+    height: 100%;
+    width: 80%;
+}
+
+.thumbnail {
+    height: 100%;
+}
+
+@media only screen and (min-width: 481px) {
+    .gallery-wrapper {
+        width: 250px;
+        height: 300px;
+    }
+    .focus-image-box {
+        height: 80%;
+        width: 100%;
+    }
+
+    .image-scroller {
+        height: 100%;
+        width: 20%;
+        overflow-y: scroll;
+        overflow-x: visible;
+    }
+
+    .thumbnail {
+        width: 100%;
+        height: auto;
+    }
+}

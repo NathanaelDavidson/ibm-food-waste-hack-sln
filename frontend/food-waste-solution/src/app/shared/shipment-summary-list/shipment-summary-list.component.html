@@ -1,0 +1,5 @@
+<mat-grid-list [cols]="3">
+  <mat-grid-tile>
+    <app-shipment-summary-tile *ngFor="let shipment of shipments" [shipment]="shipment"></app-shipment-summary-tile>
+  </mat-grid-tile>
+</mat-grid-list>

@@ -1,0 +1,98 @@
+<form [formGroup]="biddingForm" fxLayout="column" fxLayoutAlign="start center">
+  <table mat-table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>
+          Temp (&deg;C)
+        </th>
+        <th>
+          Amb Temp (&deg;C)
+        </th>
+        <th>
+          Co2
+        </th>
+        <th>
+          VOC
+        </th>
+        <th>
+          Freshness
+        </th>
+        <th>
+          Bid (USD)
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="shipment.latestContract as latestContract">
+        <td>
+          Current Threshold
+        </td>
+        <!--Fill after adjusting model-->
+        <td>{{latestContract.tempThreshold}}</td>
+        <td>{{latestContract.ambientTempThreshold}}</td>
+        <td>{{latestContract.co2Threshold}}</td>
+        <td>{{latestContract.vocThreshold}}</td>
+        <td>{{latestContract.freshnessThreshold}</td>
+      <td>{{latestContract.price | currency}}</td>
+      </tr>
+      <tr *ngIf="shipment.boundaryReadings() as boundaryReadings">
+        <td>
+          Thresholds Reached
+        </td>
+        <td>{{boundaryReadings.temp}}</td>
+        <td>{{boundaryReadings.ambientTemp}}</td>
+        <td>{{boundaryReadings.co2}}</td>
+        <td>{{boundaryReadings.voc}}</td>
+        <td>{{boundaryReadings.freshness}}</td>
+        <td>{{0 | currency}}</td>
+      </tr>
+      <tr>
+        <td>
+          Your Offer
+        </td>
+        <td>
+          <mat-form-field appearance="outline">
+            <mat-label>Temp</mat-label>
+            <input matInput type="number" formControlName="temp">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="outline">
+            <mat-label>Ambient Temp</mat-label>
+            <input matInput type="number" formControlName="ambientTemp">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="outline">
+            <mat-label>Co2</mat-label>
+            <input matInput type="number" min="0" step="0.01" formControlName="co2">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="outline">
+            <mat-label>VOC</mat-label>
+            <input matInput type="number" min="0" step="0.01" formControlName="voc">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="outline">
+            <mat-label>Freshness</mat-label>
+            <input matInput type="number" min="0" max="1" step="0.01" formControlName="freshness">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="outline">
+            <mat-label>Bid</mat-label>
+            <input matInput type="number" min="0" step="1" formControlName="bid">
+          </mat-form-field>
+          <span matPrefix>$&nbsp;</span>
+          <span matSuffix>.00</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+  <mat-error>{{errorMessage}}</mat-error>
+  <p>{{successMessage}}</p>
+</form>

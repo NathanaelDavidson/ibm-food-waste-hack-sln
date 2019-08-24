@@ -1,0 +1,13 @@
+<ng-container *ngIf="auth.getCurrentUser() as currentUser">
+  <div fxLayout="column" fxLayoutAlign="center end">
+    <ng-container *ngIf="currentUser.type === 'buyer'">
+      <a mat-button *ngFor="let option of buyerNavOptions" fxFlexOffset="10px"
+        [routerLink]="option.routerLink" (click)="linkClicked.emit()">{{option.name | titlecase}}</a>
+    </ng-container>
+    <ng-container *ngIf="currentUser.type === 'seller'">
+      <a mat-button *ngFor="let option of sellerNavOptions"
+        [routerLink]="option.routerLink" (click)="linkClicked.emit()">{{option.name | titlecase}}</a>
+    </ng-container>
+    <a mat-button [routerLink]="['/logout']" (click)="linkClicked.emit()">Log out</a>
+  </div>
+</ng-container>

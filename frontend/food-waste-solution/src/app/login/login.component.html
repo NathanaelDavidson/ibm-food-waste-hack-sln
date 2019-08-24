@@ -1,0 +1,25 @@
+<div fxLayout="column" fxLayoutAlign="start center">
+  <h1>Login</h1>
+  <div fxFlex="grow">
+    <form [formGroup]="loginForm" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px"
+      (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>
+          Username
+        </mat-label>
+        <input matInput type="text" matInput formControlName="username">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>
+          Password
+        </mat-label>
+        <input matInput type="password" matInput formControlName="password">
+      </mat-form-field>
+      <mat-checkbox formControlName="remember">Remember me</mat-checkbox>
+      <div fxLayoutGap="10px">
+        <a mat-raised-button color="warn" [routerLink]="['/']" (click)="loginForm.reset()">Cancel</a>
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

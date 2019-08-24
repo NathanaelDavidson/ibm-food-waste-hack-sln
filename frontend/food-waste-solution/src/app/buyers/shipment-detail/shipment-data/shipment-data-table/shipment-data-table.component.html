@@ -1,0 +1,32 @@
+<table mat-table>
+  <thead>
+    <tr>
+      <th mat-header-cell></th>
+      <th mat-header-cell>
+        Latest
+      </th>
+      <th mat-header-cell>
+        Min
+      </th>
+      <th mat-header-cell>
+        Max
+      </th>
+      <th mat-header-cell>
+        Avg
+      </th>
+      <th mat-header-cell>
+        Updated
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dataSet of annotatedData">
+      <td mat-cell>{{dataSet.shortLabel | titlecase}}</td>
+      <td mat-cell>{{dataSet.latestReading.value | number : '1.1-2'}}</td>
+      <td mat-cell>{{dataSet.stats.min | number : '1.1-2'}}</td>
+      <td mat-cell>{{dataSet.stats.max | number : '1.1-2'}}</td>
+      <td mat-cell>{{dataSet.stats.avg | number : '1.1-2'}}</td>
+      <td mat-cell>{{dataSet.latestReading.timestamp | date : 'short'}}</td>
+    </tr>
+  </tbody>
+</table>
