@@ -1,33 +1,35 @@
-<div *ngIf="(shipment$ | async) as shipment; else placeholder" fxLayout="row" fxLayoutAlign="center stretch"
-  fxLayout.xs="column" fxLayoutAlign.xs="start center">
+<h1 class="text-center">Shipment Details</h1>
+<div *ngIf="(shipment$ | async) as shipment; else placeholder" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
   <!--Product details-->
-  <div fxLayout="column" fxLayoutAlign="center center">
-    <app-gallery [images]="[shipment.primaryImgUrl].concat(shipment.updateImgUrls)"></app-gallery>
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayout.xs="column" fxLayoutAlign.xs="start center" fxLayoutGap="20px" fxLayoutGap.xs="10px">
+    <app-gallery [images]="shipment.primaryImgUrl ? [shipment.primaryImgUrl].concat(shipment.images) : shipment.images">
+    </app-gallery>
     <table>
       <tr>
-        <td>Product</td>
-        <td>{{shipment.productName}}</td>
+        <td class="description-label">Product</td>
+        <td class="description-cell">{{shipment.productName}}</td>
       </tr>
       <tr>
-        <td>Description</td>
-        <td>{{shipment.description}}</td>
+        <td class="description-label">Description</td>
+        <td class="description-cell">{{shipment.description}}</td>
       </tr>
       <tr>
-        <td>Quantity</td>
-        <td>{{shipment.quantity.value}} {{shipment.quantity.units}}</td>
+        <td class="description-label">Quantity</td>
+        <td class="description-cell">{{shipment.quantity.number}} {{shipment.quantity.units}}</td>
       </tr>
       <tr>
-        <td>Source</td>
-        <td>{{shipment.source}}</td>
+        <td class="description-label">Source</td>
+        <td class="description-cell">{{shipment.source}}</td>
       </tr>
       <tr>
-        <td>Destination</td>
-        <td>{{shipment.destination}}</td>
+        <td class="description-label">Destination</td>
+        <td class="description-cell">{{shipment.destination}}</td>
       </tr>
     </table>
   </div>
   <!--Quality tracking data-->
   <app-shipment-data [shipment]="shipment"></app-shipment-data>
+  <app-bidding-form [shipment]="shipment"></app-bidding-form>
 </div>
 <ng-template #placeholder>
   <div fxFill fxLayoutAlign="center center">

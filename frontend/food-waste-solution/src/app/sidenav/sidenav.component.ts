@@ -16,11 +16,13 @@ interface NavOption {
 export class SidenavComponent {
   @Output() linkClicked = new EventEmitter<void>();
   buyerNavOptions: NavOption[] = [
-    {name: 'home', routerLink: ['/buyers']}
+    {name: 'home', routerLink: ['/buyers']},
+    {name: 'offers', routerLink: ['/buyers/offers']}
   ];
   sellerNavOptions: NavOption[] = [
     {name: 'home', routerLink: ['/sellers']},
-    {name: 'new shipment', routerLink: ['/sellers/shipments/create']}
+    {name: 'offers', routerLink: ['/sellers/offers']},
+    {name: 'new shipment', routerLink: ['/sellers/shipments/create']},
   ];
   constructor(public auth: AuthService) { }
 }

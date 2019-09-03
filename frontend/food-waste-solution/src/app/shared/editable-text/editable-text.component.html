@@ -1,0 +1,10 @@
+<div fxLayout="center center">
+  <ng-container *ngIf="editing; else staticText">
+    <mat-form-field appearance="outline">
+      <input matInput type="text" [placeholder]="placeholder" [formControl]="control" (blur)="onInputBlur()">
+    </mat-form-field>
+  </ng-container>
+  <ng-template #staticText>
+    <p (click)="onTextClick()">{{control.value}} <mat-icon *ngIf="canActivate" aria-label="Edit">edit</mat-icon></p>
+  </ng-template>
+</div>

@@ -1,5 +1,40 @@
-<mat-card>
-    <mat-card-content>
-        
-    </mat-card-content>
-</mat-card>
+<div>
+  <div *ngIf="shipment$ | async as shipment" fxLayoutAlign="space-between center" style="cursor: pointer" [routerLink]="['..', 'shipments', contract.shipment]">
+    <h3>{{shipment.productName | titlecase}}</h3>
+    <h3 style="font-weight: lighter">{{shipment.quantity.number}} {{shipment.quantity.units}}</h3>
+  </div>
+  <table mat-table>
+    <thead>
+      <tr>
+        <th>
+          Temp (&deg;C)
+        </th>
+        <th>
+          Amb Temp (&deg;C)
+        </th>
+        <th>
+          Humid
+        </th>
+        <th>
+          VOC
+        </th>
+        <th>
+          Freshness
+        </th>
+        <th>
+          Bid (USD)
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{contract.tempThreshold}}</td>
+        <td>{{contract.ambientTempThreshold}}</td>
+        <td>{{contract.humidThreshold}}</td>
+        <td>{{contract.vocThreshold}}</td>
+        <td>{{contract.freshnessThreshold}}</td>
+        <td>{{contract.price | currency}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

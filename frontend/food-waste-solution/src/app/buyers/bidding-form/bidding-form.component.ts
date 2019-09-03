@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { Shipment } from 'src/app/models/shipment';
+import { Shipment, boundaryReadings } from 'src/app/models/shipment';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ContractService } from 'src/app/contract.service';
+import { Contract } from 'src/app/models/contract';
 
 @Component({
   selector: 'app-bidding-form',
@@ -10,21 +11,24 @@ import { ContractService } from 'src/app/contract.service';
 })
 export class BiddingFormComponent implements OnChanges {
   @Input() shipment: Shipment;
+  latestContract: Contract;
+  boundaryReadings;
   successMessage: string;
   errorMessage: string;
   biddingForm: FormGroup;
   constructor(private formBuilder: FormBuilder, private contractService: ContractService) { }
 
   ngOnChanges() {
-    const latestContract = this.shipment.contracts ? this.shipment.contracts[this.shipment.contracts.length - 1] : null;
-    const bounds = latestContract ? {
-      ambientTemp: latestContract.tempThreshold,
-      temp: latestContract.tempThreshold,
-      humid: latestContract.humidThreshold,
-      voc: latestContract.vocThreshold,
-      freshness: latestContract.freshnessThreshold,
-      bid: latestContract.price
-    } : this.shipment.boundaryReadings();
+    this.latestContract = this.shipment.contracts ? this.shipment.contracts[this.shipment.contracts.length - 1] : null;
+    this.boundaryReadings = boundaryReadings(this.shipment);
+    const bounds = this.latestContract ? {
+      ambientTemp: this.latestContract.tempThreshold,
+      temp: this.latestContract.tempThreshold,
+      humid: this.latestContract.humidThreshold,
+      voc: this.latestContract.vocThreshold,
+      freshness: this.latestContract.freshnessThreshold,
+      bid: this.latestContract.price
+    } : this.boundaryReadings;
     const ambientTempValidators = [Validators.required];
     const tempValidators = [Validators.required];
     const humidValidators = [Validators.required];
@@ -46,8 +50,8 @@ export class BiddingFormComponent implements OnChanges {
     if (bounds.freshness) {
       freshnessValidators.push(Validators.max(bounds.freshness));
     }
-    if (latestContract) {
-      bidValidators.push(Validators.max(latestContract.price));
+    if (this.latestContract) {
+      bidValidators.push(Validators.max(this.latestContract.price));
     }
     this.biddingForm = this.formBuilder.group({
       ambientTemp: [undefined, ambientTempValidators],

@@ -1,5 +1,4 @@
-import { SimpleContract } from './contract';
-import { User } from './user';
+import { Contract } from './contract';
 
 function maxReading(readings: Reading[]) {
     let max = null;
@@ -18,18 +17,18 @@ function minReading(readings: Reading[]) {
 }
 
 abstract class BaseShipment {
-    shipmentId: number;
+    shipmentId?: number;
     productName: string;
     description: string;
     quantity: {
         number: number;
         units: string;
-        currency: string;
+        currency: string
         value: number;
     };
     source: string;
     destination: string;
-    primaryImgUrl: string;
+    primaryImgUrl?: string;
 }
 
 export class Reading {
@@ -54,10 +53,11 @@ export class Shipment extends BaseShipment {
     humidReadings: Reading[];
     vocReadings: Reading[];
     freshnessReadings: Reading[];
-    contracts: SimpleContract[];
+    contracts: Contract[];
     images: string[];
+    timestamps: any[];
 
-    get latestContract() {
+    latestContract() {
         return this.contracts ? this.contracts[this.contracts.length - 1] : null;
     }
 
@@ -70,4 +70,17 @@ export class Shipment extends BaseShipment {
             freshness: minReading(this.freshnessReadings)
         };
     }
+}
+
+export function boundaryReadings(shipment: Shipment) {
+    if (shipment == null) {
+        return null;
+    }
+    return {
+        ambientTemp: maxReading(shipment.ambientTempReadings),
+        temp: maxReading(shipment.tempReadings),
+        humid: maxReading(shipment.humidReadings),
+        voc: maxReading(shipment.vocReadings),
+        freshness: minReading(shipment.freshnessReadings)
+    };
 }

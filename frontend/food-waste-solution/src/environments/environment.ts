@@ -23,7 +23,7 @@ export const environment = {
     contractDetail: CONTRACTS_BASE_URL,
     shipmentDetail: SHIPMENTS_BASE_URL + '',
     shipmentList: SHIPMENTS_BASE_URL + 'all/',
-    shipmentListBySeller: SHIPMENTS_BASE_URL + '/seller/',
+    shipmentListBySeller: SHIPMENTS_BASE_URL + 'seller/',
     shipmentCreate: SHIPMENTS_BASE_URL + 'create/'
   }
 };

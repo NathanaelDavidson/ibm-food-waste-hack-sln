@@ -1,8 +1,19 @@
+<!--TODO Add error message and loading spinner-->
 <div fxLayout="column" fxLayoutAlign="center center">
-  <div *ngIf="sellerShipments; else placeholder">
-
-  </div>
+  <h1>Your Shipments</h1>
+  <app-shipment-summary-list *ngIf="(sellerShipments$ | async) as sellerShipments; else placeholder"
+    [shipments]="sellerShipments"></app-shipment-summary-list>
   <ng-template #placeholder>
-    <a fxFlexOffset="25px" mat-raised-button color="primary" [routerLink]="['/sellers/shipments/create']">Add a shipment</a>
+    <mat-spinner *ngIf="loading; else statusMessage"></mat-spinner>
+    <ng-template #statusMessage>
+      <ng-container *ngIf="errorMessage; else noneFoundMessage">
+        <mat-error>{{errorMessage}}</mat-error>
+      </ng-container>
+      <ng-template #noneFoundMessage>
+        <h4 style="font-weight: lighter">None found</h4>
+        <a fxFlexOffset="25px" mat-raised-button color="primary" [routerLink]="['/sellers/shipments/create']">Add a
+          shipment</a>
+      </ng-template>
+    </ng-template>
   </ng-template>
 </div>

@@ -22,9 +22,10 @@
     <input matInput formControlName="source" required>
   </mat-form-field>
   <mat-form-field id='dInput'>
-    <mat-label>Destination</mat-label>
+    <mat-label>Final Destination</mat-label>
     <input matInput formControlName="destination" required>
   </mat-form-field>
+  <h4>Image</h4>
   <input #fileInput type="file" accept="image/*" (change)="onInputFileChange(fileInput)">
   <div fxFlexOffset="20px" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
     <a mat-raised-button color="warn" (click)="shipmentForm.reset()">Cancel</a>

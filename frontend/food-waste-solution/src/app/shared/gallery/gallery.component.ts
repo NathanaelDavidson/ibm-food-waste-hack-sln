@@ -10,14 +10,10 @@ export class GalleryComponent implements OnInit, OnChanges {
   private reader: FileReader = new FileReader();
   galleryOptions: NgxGalleryOptions[] = [
     {
-      width: '100%',
-      height: '400px',
+      width: '300px',
+      height: '300px',
       thumbnailsColumns: 4,
       imageAnimation: NgxGalleryAnimation.Slide
-    },
-    {
-      breakpoint: 480,
-      height: '300px'
     }
   ];
   galleryImages: NgxGalleryImage[] = [];

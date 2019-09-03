@@ -1,8 +1,9 @@
 <div fxLayout="column" fxLayoutAlign="start center">
-  <mat-tab-group>
-    <mat-tab *ngFor="let data of shipmentData" [label]="data.shortLabel | uppercase">
-      <app-chart [dataSet]="data"></app-chart>
-    </mat-tab>
-  </mat-tab-group>
-  <app-shipment-data-table [annotatedData]="shipmentData"></app-shipment-data-table>
-</div>
+    <mat-tab-group>
+      <mat-tab *ngFor="let data of shipmentData" [label]="data.shortLabel | uppercase">
+        <app-chart [dataSet]="data"></app-chart>
+      </mat-tab>
+    </mat-tab-group>
+    <app-shipment-data-table [annotatedData]="shipmentData"></app-shipment-data-table>
+  </div>
+  

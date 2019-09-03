@@ -1,8 +1,11 @@
 @import '~@angular/material/theming';
+@import '~saturn-datepicker/theming';
 @import './assets/scss/palettes.scss';
 
 @include mat-core();
 
 $app-theme: mat-light-theme($app-primary, $app-accent);
 
+
+@include sat-datepicker-theme($app-theme);
 @include angular-material-theme($app-theme);

@@ -1,0 +1,38 @@
+<div fxLayout="column" fxLayoutAlign="start center" [formGroup]="formArray">
+  <h3>Shipping Availability</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Destination
+        </th>
+        <th>
+          Dates
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let control of formArray.controls; index as i"  [formGroup]="control">
+        <td>
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-form-field appearance="outline">
+              <input matInput type="text" formControlName="location" placeholder="Location name">
+              <button matSuffix mat-icon-button (click)="formArray.removeAt(i)">
+                <mat-icon aria-label="Delete">delete_forever</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <mat-form-field [formGroupName]="i">
+            <input matInput placeholder="Choose dates" [satDatepicker]="datepicker" formControlName="dates">
+            <sat-datepicker #datepicker [rangeMode]="true"></sat-datepicker>
+            <sat-datepicker-toggle matSuffix [for]="datepicker"></sat-datepicker-toggle>
+          </mat-form-field>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button mat-button type="button" (click)="formArray.addControl()"
+    [disabled]="this.formArray.length > 0 && this.formArray.invalid">Add a destination +</button>
+</div>

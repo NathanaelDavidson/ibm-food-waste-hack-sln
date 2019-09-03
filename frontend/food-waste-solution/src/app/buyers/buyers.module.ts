@@ -15,6 +15,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { BiddingFormComponent } from './bidding-form/bidding-form.component';
 import { BuyerShipmentOverviewComponent } from './buyer-shipment-overview/buyer-shipment-overview.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OffersComponent } from './offers/offers.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     ShipmentDataTableComponent,
     BiddingFormComponent,
     BuyerShipmentOverviewComponent,
+    OffersComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +38,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     ReactiveFormsModule,
     MatButtonModule,
     MatTabsModule,
+    MatInputModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
     SharedModule

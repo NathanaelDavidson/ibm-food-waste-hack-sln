@@ -1,5 +1,6 @@
 import time
 
+from json.decoder import JSONDecodeError
 from django.shortcuts import render
 from django.conf import settings
 from django.utils.decorators import method_decorator
@@ -50,7 +51,11 @@ class ContractCreate(views.APIView):
         resp = BuyerClient.init_contract(request.user.pk, shipment_id,
                                          temp_threshold, ambient_temp_threshold, humid_threshold, voc_threshold, freshness_threshold,
                                          price)
-        return Response(resp.json(), status=resp.status_code)
+        try:
+            data = resp.json()
+        except JSONDecodeError:
+            data = resp.text
+        return Response(data, status=resp.status_code)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -75,8 +80,9 @@ class ContractDetail(views.APIView):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class PendingOffersList(views.APIView):
-    def post(self, request, *args, **kwargs):
-        return SellerClient.get_pending_offers(request.user.pk)
+    def get(self, request, *args, **kwargs):
+        resp = SellerClient.get_pending_offers(request.user.pk)
+        return Response(resp.json().get('offers'), status=resp.status_code)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -113,7 +119,6 @@ class ShipmentDetail(views.APIView):
         if not shipment_id:
             return Response(status=400)
         resp = SellerClient.get_shipment(shipment_id)
-        print(resp.json())
         return Response(zipAllReadings(resp.json().get('shipment')), status=resp.status_code)
 
 
@@ -128,7 +133,10 @@ class ShipmentList(views.APIView):
 class ShipmentListBySeller(views.APIView):
     def post(self, request, *args, **kwargs):
         resp = SellerClient.get_shipments_by_seller(request.user.pk)
-        return Response([zipAllReadings(ship) for ship in resp.json().get('shipments')], status=resp.status_code)
+        print(request.user.pk)
+        print(resp.text)
+        data = resp.json().get('shipments')
+        return Response([zipAllReadings(ship) for ship in data], status=resp.status_code)
 
 def zipAllReadings(shipment):
     if shipment == None:

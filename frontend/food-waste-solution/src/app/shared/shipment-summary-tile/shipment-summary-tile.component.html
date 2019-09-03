@@ -3,7 +3,10 @@
     <mat-card-title>{{shipment.productName}}</mat-card-title>
     <mat-card-subtitle>{{shipment.quantity.number}} {{shipment.quantity.units}}</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image [src]="shipment.primaryImgUrl">
+  <img mat-card-image *ngIf="shipment.images; else primaryImg" [src]="shipment.images[shipment.images.length - 1]">
+  <ng-template #primaryImg>
+    <img mat-card-image *ngIf="shipment.primaryImgUrl" [src]="shipment.primaryImgUrl">
+  </ng-template>
   <mat-card-content>
     <app-contract-summary *ngIf="shipment.contracts" [contract]="shipment.contracts[shipment.contracts.length - 1]"></app-contract-summary>
   </mat-card-content>

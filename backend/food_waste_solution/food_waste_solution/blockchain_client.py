@@ -13,7 +13,7 @@ class BlockchainClientBase:
 
     @staticmethod
     def get_shipment(shipment_id):
-        return requests.post(base_url + '/getshipment', {'shipmentId': 1})
+        return requests.post(base_url + '/getshipment', {'shipmentId': shipment_id})
 
 
 class SellerClient(BlockchainClientBase):

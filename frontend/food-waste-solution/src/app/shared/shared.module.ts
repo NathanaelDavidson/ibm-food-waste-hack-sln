@@ -15,6 +15,13 @@ import { ShipmentSummaryTileComponent } from './shipment-summary-tile/shipment-s
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { ShipmentSummaryListComponent } from './shipment-summary-list/shipment-summary-list.component';
 import { ContractSummaryComponent } from './contract-summary/contract-summary.component';
+import { ContractListComponent } from './contract-list/contract-list.component';
+import { ContractDetailComponent } from './contract-detail/contract-detail.component';
+import { RouterModule } from '@angular/router';
+import { EditableTextComponent } from './editable-text/editable-text.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
@@ -26,15 +33,24 @@ import { ContractSummaryComponent } from './contract-summary/contract-summary.co
     ShipmentSummaryTileComponent,
     ImageUploadComponent,
     ShipmentSummaryListComponent,
-    ContractSummaryComponent
+    ContractSummaryComponent,
+    ContractListComponent,
+    ContractDetailComponent,
+    EditableTextComponent
   ],
   imports: [
     CommonModule,
     ChartsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forChild([]),
     FlexLayoutModule,
     MatButtonModule,
     MatCardModule,
+    MatFormFieldModule,
     MatGridListModule,
+    MatInputModule,
+    MatIconModule,
     MatToolbarModule,
     NgxGalleryModule,
     MatIconModule
@@ -46,7 +62,10 @@ import { ContractSummaryComponent } from './contract-summary/contract-summary.co
     ShipmentSummaryTileComponent,
     ImageUploadComponent,
     ShipmentSummaryListComponent,
-    ContractSummaryComponent
+    ContractSummaryComponent,
+    ContractDetailComponent,
+    ContractListComponent,
+    EditableTextComponent
   ]
 })
 export class SharedModule { }

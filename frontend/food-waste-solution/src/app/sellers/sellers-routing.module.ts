@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NewShipmentComponent } from './new-shipment/new-shipment.component';
 import { SellerHomeComponent } from './seller-home/seller-home.component';
-import { ShipmentDetailComponent } from '../buyers/shipment-detail/shipment-detail.component';
+import { ShipmentDetailComponent } from './shipment-detail/shipment-detail.component';
+import { OffersComponent } from './offers/offers.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
     ]
   },
   { path: 'shipments/:id', component: ShipmentDetailComponent },
+  { path: 'offers', component: OffersComponent },
   { path: '', component: SellerHomeComponent }
 ];
 

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Contract, SimpleContract } from './models/contract';
+import { Contract } from './models/contract';
 
 @Injectable({
   providedIn: 'root'
@@ -64,8 +64,8 @@ export class ContractService {
     );
   }
 
-  getPendingOffers(): Observable<SimpleContract[]> {
-    return this.http.post<SimpleContract[]>(environment.urls.sellerOffers, {}).pipe(
+  getPendingOffers(): Observable<Contract[]> {
+    return this.http.get<Contract[]>(environment.urls.sellerOffers).pipe(
       take(1)
     );
   }

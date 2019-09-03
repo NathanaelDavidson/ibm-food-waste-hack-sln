@@ -1,0 +1,12 @@
+<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px">
+    <h1>Pending Offers</h1>
+    <mat-card *ngFor="let contract of contracts">
+        <mat-card-content>
+            <app-contract-summary [contract]="contract"></app-contract-summary>
+        </mat-card-content>
+        <mat-card-actions *ngIf="showActions">
+            <button mat-button color="primary" (click)="contractService.acceptOffer(contract.contractId)">Accept</button>
+            <button mat-button color="warn" (click)="contractService.declineOffer(contract.contractId)">Decline</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

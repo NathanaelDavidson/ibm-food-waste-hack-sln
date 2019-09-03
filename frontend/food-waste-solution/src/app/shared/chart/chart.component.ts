@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Reading } from 'src/app/models/shipment';
 import { SingleDataSet } from 'ng2-charts';
 import { AnnotatedDataSet } from 'src/app/sellers/shipment-detail/shipment-data/shipment-data.component';
@@ -32,7 +32,7 @@ export class ChartComponent implements OnChanges {
       },
     ].concat(
       Object.keys(this.dataSet.stats).map(label => {
-        const value = this.dataSet.stats[label].value;
+        const value = this.dataSet.stats[label];
         return {
           label,
           data: [

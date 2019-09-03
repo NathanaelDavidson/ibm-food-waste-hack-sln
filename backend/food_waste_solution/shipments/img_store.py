@@ -3,7 +3,7 @@ from ibm_botocore.client import Config, ClientError
 from django.conf import settings
 
 COS_BUCKET_NAME = 'shipment-initial-photos'
-COS_ENDPOINT = setting.COS_ENDPOINT
+COS_ENDPOINT = settings.COS_ENDPOINT
 COS_API_KEY_ID = settings.COS_API_KEY_ID
 COS_AUTH_ENDPOINT = 'https://iam.cloud.ibm.com/identity/token'
 COS_RESOURCE_CRN = settings.COS_RESOURCE_CRN

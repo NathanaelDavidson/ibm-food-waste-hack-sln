@@ -1,7 +1,8 @@
 import { Shipment } from './shipment';
 
-abstract class BaseContract {
+export class Contract {
     buyerId: number;
+    contractId: number;
     tempThreshold: number;
     humidThreshold: number;
     vocThreshold: number;
@@ -9,12 +10,5 @@ abstract class BaseContract {
     ambientTempThreshold: number;
     price: number;
     status: 'pending' | 'accepted' | 'active' | 'declined' | 'void';
-}
-
-export class SimpleContract extends BaseContract {
-    shipmentId: number;
-}
-
-export class Contract extends BaseContract {
-    shipment: Shipment;
+    shipment: number;
 }

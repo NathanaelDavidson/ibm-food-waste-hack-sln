@@ -10,7 +10,6 @@ export class AnnotatedDataSet {
     min: number,
     max: number,
     avg: number,
-    count: number
   };
   firstReadingTimestamp: Date;
   latestReading: Reading;
@@ -21,13 +20,13 @@ function annotateReadings(readings: Reading[], shortLabel: string, longLabel: st
   let min: number;
   let max: number;
   let avg: number;
-  let sum: number;
   let minX: number;
   let latestReading: Reading;
+  let sum = 0;
   let count = 0;
   const data = readings.map((reading: Reading) => {
-    const timestamp = reading.timestamp;
-    const value = reading.value;
+    const timestamp = +reading.timestamp;
+    const value = +reading.value;
     count++;
     sum += value;
     if (!latestReading || latestReading.timestamp < reading.timestamp) {
@@ -36,7 +35,8 @@ function annotateReadings(readings: Reading[], shortLabel: string, longLabel: st
     min = min != null ? Math.min(min, value) : value;
     max = max != null ? Math.max(max, value) : value;
     minX = minX != null ? Math.min(minX, timestamp) : timestamp;
-    return {t: new Date(timestamp), y: value};
+    const date = new Date(timestamp);
+    return {t: date, y: value, x: date};
   });
   if (count) {
     avg = sum / count;
@@ -49,7 +49,6 @@ function annotateReadings(readings: Reading[], shortLabel: string, longLabel: st
       min,
       max,
       avg,
-      count
     },
     firstReadingTimestamp: minX != null ? new Date(minX) : null,
     latestReading
